@@ -1,0 +1,27 @@
+{
+    "name": "varnish-configuration-language",
+    "displayName": "Syntax Highlighting for Varnish VCL",
+    "description": "Varnish Config Language",
+    "publisher": "YtterdalVentures",
+    "repository": "https://github.com/auduny",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.61.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "vcl",
+            "aliases": ["VCL", "vcl"],
+            "extensions": [".vcl.erb",".vcl"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "vcl",
+            "scopeName": "source.vcl",
+            "path": "./syntaxes/vcl.tmLanguage.json"
+        }]
+    }
+}
