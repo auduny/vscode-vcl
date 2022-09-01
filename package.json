@@ -1,27 +1,59 @@
 {
-    "name": "varnish-configuration-language",
-    "displayName": "Syntax Highlighting for Varnish VCL",
-    "description": "Varnish Config Language",
-    "publisher": "YtterdalVentures",
-    "repository": "https://github.com/auduny",
-    "version": "0.0.1",
-    "engines": {
-        "vscode": "^1.61.0"
-    },
-    "categories": [
-        "Programming Languages"
-    ],
-    "contributes": {
-        "languages": [{
-            "id": "vcl",
-            "aliases": ["VCL", "vcl"],
-            "extensions": [".vcl.erb",".vcl"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "vcl",
-            "scopeName": "source.vcl",
-            "path": "./syntaxes/vcl.tmLanguage.json"
-        }]
-    }
+	"name": "varnish-configuration-language",
+	"displayName": "Syntax Highlighting for Varnish VCL and Varnish VTC",
+	"description": "Varnish Config Language, Varnish Test Config",
+	"publisher": "YtterdalVentures",
+	"repository": "https://github.com/auduny",
+	"version": "0.0.2",
+	"engines": {
+		"vscode": "^1.61.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "vcl",
+				"aliases": [
+					"VCL",
+					"vcl"
+				],
+				"extensions": [
+					".vcl.erb",
+					".vcl"
+				],
+				"configuration": "./language-configuration.json"
+			},
+			{
+				"id": "vtc",
+				"aliases": [
+					"Vtc",
+					"vtc"
+				],
+				"extensions": [
+					".vtc"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "vcl",
+				"scopeName": "source.vcl",
+				"path": "./syntaxes/vcl.tmLanguage.json"
+			},
+			{
+				"language": "vtc",
+				"scopeName": "source.vtc",
+				"path": "./syntaxes/vtc.tmLanguage.json"
+			}
+		]
+	},
+	"__metadata": {
+		"id": "dc902496-5dae-41a5-922f-1658496dfba6",
+		"publisherDisplayName": "Ytterdal Ventures",
+		"publisherId": "213ed9b9-2bdc-4374-9f73-43d95f05162e",
+		"isPreReleaseVersion": false
+	}
 }

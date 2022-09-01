@@ -1,0 +1,352 @@
+{
+  "fileTypes": [
+    "vtc.erb",
+    "vtc"
+  ],
+  "foldingStartMarker": "^.*\\b(client|server)\\s*(\\w+\\s*)?(\\s*\\{[^\\}]*)?\\s*$",
+  "foldingStopMarker": "^\\s*\\}",
+  "name": "vtc",
+  "patterns": [
+    {
+      "match": "\\#.*",
+      "name": "comment.line.number-sign.vcl"
+    },
+    {
+      "match": "\\/\\/.*",
+      "name": "comment.line.double-slash.vcl"
+    },
+    {
+      "begin": "\\/\\*",
+      "end": "\\*\\/",
+      "name": "comment.block.vcl"
+    },
+    {
+      "name": "meta.include.vcl",
+      "begin": "\\b(import|include)\\b\\s*",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.import"
+        }
+      },
+      "end": "(?=\\s|;|$)",
+      "patterns": [
+        {
+          "include": "#strings"
+        }
+      ]
+    },
+    {
+      "name": "meta.director.vcl",
+      "begin": "(?i)^\\s*(client|server)\\s+([a-z0-9_]+)\\s*\\{",
+      "end": "\\}",
+      "captures": {
+        "1": {
+          "name": "storage.type.client.vtc"
+        },
+        "2": {
+          "name": "entity.name.type.test.vtc"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
+    },
+    {
+      "name": "meta.backend.vcl",
+      "begin": "(?i)^\\s*(backend)\\s+([a-z0-9_]+)\\s*\\{",
+      "end": "\\}",
+      "captures": {
+        "1": {
+          "name": "storage.type.backend.vcl"
+        },
+        "2": {
+          "name": "entity.name.type.backend.vcl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
+    },
+    {
+      "name": "meta.backend.vcl",
+      "begin": "(?i)\\s*(probe|connect_timeout|first_byte_timeout|ssl_verify_peer|between_bytes_timeout|ip_version)\\s*=\\s([^\\s]+)",
+      "end": "\\}",
+      "captures": {
+        "1": {
+          "name": "variable.subkey.vcl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
+    },
+    {
+      "name": "meta.gotodirector.vcl",
+      "begin": "(?i)^\\s*(new)\\s+([a-z0-9_]+)\\s*\\=",
+      "end": "\\}",
+      "captures": {
+        "1": {
+          "name": "storage.type.gotodirector.vcl"
+        },
+        "2": {
+          "name": "entity.name.type.gotodirector.vcl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
+    },
+    {
+      "name": "meta.acl.vcl",
+      "begin": "(?i)^\\s*(acl)\\s+([a-z0-9_]+)\\s*\\{",
+      "end": "\\}",
+      "captures": {
+        "1": {
+          "name": "storage.type.acl.vcl"
+        },
+        "2": {
+          "name": "entity.name.type.acl.vcl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
+    },
+    {
+      "name": "meta.probe.vcl",
+      "match": "(?i)^\\s*(probe)\\s+([a-z0-9_]+)\\s*",
+      "captures": {
+        "1": {
+          "name": "storage.type.probe.vcl"
+        },
+        "2": {
+          "name": "entity.name.type.probe.vcl"
+        }
+      }
+    },
+    {
+      "name": "meta.subroutine.vcl",
+      "begin": "(?i)^\\s*(sub)\\s+([a-z0-9_]+)\\s*\\{",
+      "end": "\\}",
+      "captures": {
+        "1": {
+          "name": "storage.type.subroutine.vcl"
+        },
+        "2": {
+          "name": "entity.name.type.subroutine.vcl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
+    },
+    {
+      "name": "meta.error.vcl",
+      "begin": "\\b(error)\\b\\s*",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.error"
+        }
+      },
+      "end": "(?=\\s|;|$)",
+      "patterns": [
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#numbers"
+        }
+      ]
+    },
+    {
+      "match": "\\b(rxreq|txresp|new|set|unset|remove|synthetic|call|if|else|elsif|else if|return|deliver|error|fetch|hash|hit_for_pass|lookup|ok|pass|pipe|restart|synth|retry|abandon|fail|purge)\\b",
+      "captures": {
+        "1": {
+          "name": "keyword.control.php"
+        }
+      }
+    },
+    {
+      "include": "#variables"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#functions"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#subkeys"
+    },
+    {
+      "include": "#blocks"
+    }
+  ],
+  "repository": {
+    "blocks": {
+      "patterns": [
+        {
+          "begin": "\\{",
+          "end": "\\}",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ]
+        }
+      ]
+    },
+    "subkeys": {
+      "patterns": [
+        {
+          "name": "variable.subkey.vcl",
+          "match": "\\.(max_connections|first_byte_timeout|between_bytes_timeout|probe|host_header|retries|backend|weight|host|list|port|connect_timeout|ttl|suffix|url|request|window|threshold|initial|expected_response|interval|timeout)\\b"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "match": "\\b(true|false|now|\\-start|\\-run)\\b",
+          "name": "constant.builtin.vcl"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "match": "(hash_data|regsuball|regsub|ban_url|ban|purge|synth)",
+          "name": "support.function.builtin.vcl"
+        },
+        {
+          "match": "std\\.(log|toupper|tolower|set_ip_tos|random|log|syslog|fileread|collect|duration|integer|ip)",
+          "name": "support.function.module.std.vcl"
+        },
+        {
+          "match": "redis[0-9]?\\.(call|send|pipeline|init_redis)",
+          "name": "support.function.module.libvmodredis.vcl"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "match": "(req|bereq|obj|beresp|client|server|resp)\\.[a-zA-Z0-9\\-\\_\\.]+",
+          "name": "variable.other.vcl"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "include": "#string-long"
+        },
+        {
+          "include": "#string-single-quoted"
+        },
+        {
+          "include": "#string-double-quoted"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "match": "\\b[0-9]+ ?(m|s|h|d|w)\\b",
+          "name": "constant.numeric.time.vcl"
+        },
+        {
+          "match": "\\b[0-9]+(\\b|;)",
+          "name": "constant.numeric.vcl"
+        }
+      ]
+    },
+    "string-long": {
+      "patterns": [
+        {
+          "begin": "\\{\"",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.vcl"
+            }
+          },
+          "contentName": "meta.string-contents.quoted.double.vcl",
+          "end": "\"\\}",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.vcl"
+            }
+          },
+          "name": "string.quoted.long.vcl"
+        }
+      ]
+    },
+    "string-double-quoted": {
+      "patterns": [
+        {
+          "begin": "\"",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.vcl"
+            }
+          },
+          "contentName": "meta.string-contents.quoted.double.vcl",
+          "end": "\"",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.vcl"
+            }
+          },
+          "name": "string.quoted.double.vcl",
+          "patterns": [
+            {
+              "match": "\\\\[\\\\\"]",
+              "name": "constant.character.escape.vcl"
+            }
+          ]
+        }
+      ]
+    },
+    "string-single-quoted": {
+      "begin": "'",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.vcl"
+        }
+      },
+      "contentName": "meta.string-contents.quoted.single.vcl",
+      "end": "'",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.vcl"
+        }
+      },
+      "name": "string.quoted.single.vcl",
+      "patterns": [
+        {
+          "match": "\\\\[\\\\']",
+          "name": "constant.character.escape.vcl"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.vtc"
+}
