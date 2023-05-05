@@ -4,11 +4,12 @@ This is a plugin for VCL configuraion.
 
 ## Features
 
-Just syntax so far
+* Syntax for VCL (Varnish Configuration Language) and VTC (Varnish Test Configuration)
+* LSP-server support from https://github.com/m4r7inp/varnish-lsp
 
 ## Requirements
 
-None
+
 
 ## Extension Settings
 

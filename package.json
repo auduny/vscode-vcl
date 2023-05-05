@@ -3,7 +3,7 @@
 	"displayName": "Syntax Highlighting for Varnish VCL and Varnish VTC",
 	"description": "Varnish Config Language, Varnish Test Config",
 	"publisher": "YtterdalVentures",
-	"repository": "https://github.com/auduny",
+	"repository": "https://github.com/auduny/vscode-vcl",
 	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.61.0"
@@ -11,6 +11,7 @@
 	"categories": [
 		"Programming Languages"
 	],
+
 	"contributes": {
 		"languages": [
 			{
@@ -25,6 +26,7 @@
 				],
 				"configuration": "./language-configuration.json"
 			},
+			
 			{
 				"id": "vtc",
 				"aliases": [
@@ -48,12 +50,48 @@
 				"scopeName": "source.vtc",
 				"path": "./syntaxes/vtc.tmLanguage.json"
 			}
-		]
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Varnish VCL",
+			"properties": {
+				"varnish-vcl.varnish-lsp": {
+					"scope": "resource",
+					"type": "string",
+					"default": "/usr/local/bin/varnish-lsp",
+					"description": "Path of varnish-lsp"
+				}
+			}
+		}
 	},
 	"__metadata": {
 		"id": "dc902496-5dae-41a5-922f-1658496dfba6",
 		"publisherDisplayName": "Ytterdal Ventures",
 		"publisherId": "213ed9b9-2bdc-4374-9f73-43d95f05162e",
 		"isPreReleaseVersion": false
+	},
+	"main": "./out/extension",
+	"scripts": {
+		"vscode:prepublish": "tsc -b",
+		"build": "tsc -b",
+		"watch": "tsc -b -w",
+		"lint": "eslint --ext=ts ."
+	},
+	"dependencies": {
+		"got": "^11.8.2",
+		"vscode-languageclient": "^8.1.0"
+	},
+	"devDependencies": {
+		"@types/mocha": "^8.0.3",
+		"@types/node": "^12.12.0",
+		"@types/vscode": "^1.52.0",
+		"@typescript-eslint/eslint-plugin": "^4.17.0",
+		"@typescript-eslint/parser": "^4.17.0",
+		"eslint": "^7.21.0",
+		"eslint-config-prettier": "^8.1.0",
+		"eslint-plugin-prettier": "^3.3.1",
+		"prettier": "^2.2.1",
+		"typescript": "^4.2.2",
+		"vsce": "^1.87.0"
 	}
 }
