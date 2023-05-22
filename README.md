@@ -10,7 +10,6 @@ This is a plugin for VCL configuraion.
 ## Requirements
 
 
-
 ## Extension Settings
 
 None

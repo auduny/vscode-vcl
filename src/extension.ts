@@ -9,22 +9,10 @@ const TAG = 'v0.1.0';
 let client: lsp.LanguageClient;
 
 export async function activate(context: vscode.ExtensionContext) {
-
   const serverExecutable: lsp.Executable = {
-//    command: serverPath,
-    command: '/Users/ay/src/private/vscode/varnish-lsp/target/debug/varnishls',
-    args: ['lsp','--stdio','--debug'],
-    options: {
-      env: { RUST_LOG: 'debug' },
-    },
-    
+    command: __dirname + '/lsp/bin/varnishls-' + process.platform + "-" + process.arch,
+    args: ['lsp','--stdio']
   };
-     //Create output channel
-     let output = vscode.window.createOutputChannel("Varnsh-VCL");
-
-     //Write to output.
-     output.appendLine("I am a apple.");
-     output.appendLine(process.env.PATH)
 
   const serverOptions: lsp.ServerOptions = {
     run: serverExecutable,
@@ -32,7 +20,7 @@ export async function activate(context: vscode.ExtensionContext) {
   };
 
   const clientOptions: lsp.LanguageClientOptions = {
-    documentSelector: [{ scheme: 'file', language: 'vcl' }],
+    documentSelector: [{ scheme: 'file', language: 'vcl' }, { scheme: 'file', language: 'vtc' } ],
   };
 
   client = new lsp.LanguageClient(
@@ -41,12 +29,12 @@ export async function activate(context: vscode.ExtensionContext) {
     serverOptions,
     clientOptions
   );
+  console.error("prompeguri\n");
+  console.log(__dirname);
   client.start();
 }
 
 export async function deactivate(): Promise<void> {
-  let myoutput = vscode.window.createOutputChannel("Varnsh-VCL-debug");
-  myoutput.append("Da forsøker vi å skru oss av");
   if (client) {
     
     await client.stop();
