@@ -10,8 +10,10 @@ let client: lsp.LanguageClient;
 
 export async function activate(context: vscode.ExtensionContext) {
   const serverExecutable: lsp.Executable = {
+//    command: '/Users/ay/src/private/vscode/varnishls/target/debug/varnishls',
+//    command: '/Users/ay/src/private/vscode/varnishls/target/release/varnishls',
     command: __dirname + '/lsp/bin/varnishls-' + process.platform + "-" + process.arch,
-    args: ['lsp','--stdio']
+    args: ['lsp','--stdio','--debug']
   };
 
   const serverOptions: lsp.ServerOptions = {
