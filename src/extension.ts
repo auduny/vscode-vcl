@@ -13,7 +13,7 @@ export async function activate(context: vscode.ExtensionContext) {
 //    command: '/Users/ay/src/private/vscode/varnishls/target/debug/varnishls',
 //    command: '/Users/ay/src/private/vscode/varnishls/target/release/varnishls',
     command: __dirname + '/lsp/bin/varnishls-' + process.platform + "-" + process.arch,
-    args: ['lsp','--stdio','--debug']
+    args: ['lsp','--stdio']
   };
 
   const serverOptions: lsp.ServerOptions = {
@@ -31,7 +31,7 @@ export async function activate(context: vscode.ExtensionContext) {
     serverOptions,
     clientOptions
   );
-  console.error("prompeguri\n");
+  console.error("prompeguri");
   console.log(__dirname);
   client.start();
 }
