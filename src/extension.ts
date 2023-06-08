@@ -1,18 +1,24 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
 import * as lsp from 'vscode-languageclient/node';
-
+import { getServerOrDownload } from './download';
 // import { getServerOrDownload } from './download';
 
 const TAG = 'v1.0.0';
+const LSPTAG = 'v0.0.3';
 
 let client: lsp.LanguageClient;
 
 export async function activate(context: vscode.ExtensionContext) {
+  const serverPath = /*context.extensionMode === vscode.ExtensionMode.Production*/ true
+  ? await getServerOrDownload(context, LSPTAG)
+  : path.resolve(__dirname, '../../target/release/varnishls');
+
   const serverExecutable: lsp.Executable = {
 //    command: '/Users/ay/src/private/vscode/varnishls/target/debug/varnishls',
 //    command: '/Users/ay/src/private/vscode/varnishls/target/release/varnishls',
-    command: __dirname + '/lsp/bin/varnishls-' + process.platform + "-" + process.arch,
+//    command: __dirname + '/lsp/bin/varnishls-darwin-x86_64',
+    command: serverPath,
     args: ['lsp','--stdio']
   };
 

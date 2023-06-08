@@ -1,17 +1,23 @@
 {
 	"name": "varnish-configuration-language",
-	"displayName": "Syntax Highlighting for Varnish VCL and Varnish VTC",
+	"displayName": "Varnish VCL and Varnish VTC",
 	"description": "Varnish Config Language, Varnish Test Config",
-	"publisher": "YtterdalVentures",
+	"publisher": "audun-ytterdal",
+	"icon": "varnish-logo-png-transparent.png",
 	"repository": "https://github.com/auduny/vscode-vcl",
-	"version": "0.0.2",
+	"version": "0.3.2",
 	"engines": {
-		"vscode": "^1.61.0"
+		"vscode": "^1.74.0"
 	},
 	"categories": [
 		"Programming Languages"
 	],
-
+	"keywords": [
+		"varnish",
+		"vcl",
+		"vcc",
+		"cache"
+	],
 	"contributes": {
 		"languages": [
 			{
@@ -26,7 +32,6 @@
 				],
 				"configuration": "./language-configuration.json"
 			},
-			
 			{
 				"id": "vtc",
 				"aliases": [
@@ -53,15 +58,7 @@
 		],
 		"configuration": {
 			"type": "object",
-			"title": "Varnish VCL",
-			"properties": {
-				"varnish-vcl.varnish-lsp": {
-					"scope": "resource",
-					"type": "string",
-					"default": "/usr/local/bin/varnish-lsp",
-					"description": "Path of varnish-lsp"
-				}
-			}
+			"title": "Varnish VCL"
 		}
 	},
 	"__metadata": {
@@ -92,6 +89,6 @@
 		"eslint-plugin-prettier": "^3.3.1",
 		"prettier": "^2.2.1",
 		"typescript": "^4.2.2",
-		"vsce": "^1.87.0"
+		"@vscode/vsce": "^2.15.0"
 	}
 }
