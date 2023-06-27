@@ -36,13 +36,3 @@ None
 
 None
 
-## Release Notes
-
-#### 1.0.0
-* Added support for Martins wonderfull varnish language server in rust https://github.com/M4R7iNP/varnishls
-
-### 0.0.2 
-* Added support for VTC
-
-### 0.0.1
-* Initial release

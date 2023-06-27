@@ -23,7 +23,7 @@ const platforms = {
 
 const archs = {
   arm64: 'aarch64',
-  x86_64: 'x86_64',
+  x64: 'x86_64',
 };
 
 
