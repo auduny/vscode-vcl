@@ -1,4 +1,4 @@
-# Varnish Configuration Language - VCL
+# Varnish Configuration Language -- VCL
 
 This is a plugin for VCL configuraion.
 
