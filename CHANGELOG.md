@@ -4,6 +4,10 @@ All notable changes to the "vcl" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.6.0]
+- New release of varnishls (0.0.10)
+- Fixes #3
+
 ## [0.5.1]
 - Downgrade to varnishls v0.0.8 because 0.0.9 seems to break.
 

@@ -17,7 +17,7 @@ const BASE_URL = 'https://github.com/M4R7iNP/varnishls/releases/download/';
 
 const platforms = {
   win32: 'pc-windows-mscv',
-  linux: 'unknown-linux-musl',
+  linux: 'unknown-linux-gnu',
   darwin: 'apple-darwin',
 };
 

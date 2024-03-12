@@ -1,6 +1,6 @@
 # Varnish Configuration Language -- VCL
 
-This is a plugin for VCL configuraion.
+This is a plugin for VCL configuraion for varnish. It provides syntax highlighting, linting, and completion based on either VMODs or VCC config files. It does a pretty good job for vlc, and a decent job for vtc (varnish test configuration-files).
 
 ## Features
 
@@ -8,6 +8,7 @@ This is a plugin for VCL configuraion.
 * LSP-server support from https://github.com/m4r7inp/varnish-lsp (bundled)
 * Goto definition
 * Error checking
+* Linting
 * Completion based on either VMODs or VCC config files
 
 ## Requirements
@@ -15,12 +16,15 @@ Create a `.varnishls.toml` file in your workspace directory
 
 ```toml
 # .varnishls.toml in your workspace dir
-main_vcl = "vg/varnish.vcl" # path to the main (root) vcl file varnish uses in the workspace 
+main_vcl = "varnish.vcl" # path to the main vcl file varnish uses
+vcl_paths= ["./"] # Where to look for vcl that are included
+vcc_paths= ["../vcc-files/lib", "/usr/src/varnish-cache/lib/"] # paths to directories containing your vcc files
 vmod_paths = ["/usr/lib/varnish-plus/vmods/"] # paths to directories containing your vmods (.so binaries)
-vcc_paths = ["/usr/src/varnish-cache/lib/"] # paths to directories containing vcc files (vmod definition files)
+[lint]
+prefer_else_if = "hint"
+prefer_lowercase_headers = "hint"
+prefer_custom_headers_without_prefix = false
 ```
-
-vcc_paths will be used in place of vmods_paths if it exists.
 
 VCC are varnish-spesific "header"-files that contains syntax and docs for vmods.
 Create a directory where you dump all the VCC files that match the vmods you are using and point the vcc_paths there.
