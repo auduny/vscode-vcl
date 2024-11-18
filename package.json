@@ -1,91 +1,97 @@
 {
-	"name": "varnish-configuration-language",
-	"displayName": "Varnish VCL and Varnish VTC",
-	"description": "Varnish Config Language, Varnish Test Config",
-	"publisher": "audun-ytterdal",
-	"icon": "varnish-logo-png-transparent.png",
-	"repository": "https://github.com/auduny/vscode-vcl",
-	"version": "0.9.0",
-	"engines": {
-		"vscode": "^1.93.0"
-	},
-	"categories": [
-		"Programming Languages"
-	],
-	"keywords": [
-		"varnish",
-		"vcl",
-		"vcc",
-		"cache"
-	],
-	"contributes": {
-		"languages": [
-			{
-				"id": "vcl",
-				"aliases": [
-					"VCL",
-					"vcl"
-				],
-				"extensions": [
-					".vcl.erb",
-					".vcl"
-				],
-				"configuration": "./language-configuration.json"
-			},
-			{
-				"id": "vtc",
-				"aliases": [
-					"Vtc",
-					"vtc"
-				],
-				"extensions": [
-					".vtc"
-				],
-				"configuration": "./language-configuration.json"
-			}
-		],
-		"grammars": [
-			{
-				"language": "vcl",
-				"scopeName": "source.vcl",
-				"path": "./syntaxes/vcl.tmLanguage.json"
-			},
-			{
-				"language": "vtc",
-				"scopeName": "source.vtc",
-				"path": "./syntaxes/vtc.tmLanguage.json"
-			}
-		],
-		"configuration": {
-			"type": "object",
-			"title": "Varnish VCL"
-		}
-	},
-	"__metadata": {
-		"id": "dc902496-5dae-41a5-922f-1658496dfba6",
-		"publisherDisplayName": "Ytterdal Ventures",
-		"publisherId": "213ed9b9-2bdc-4374-9f73-43d95f05162e",
-		"isPreReleaseVersion": false
-	},
-	"main": "./out/extension",
-	"scripts": {
-		"vscode:prepublish": "tsc -b",
-		"build": "tsc -b",
-		"watch": "tsc -b -w",
-		"lint": "eslint --ext=ts ."
-	},
-	"dependencies": {
-		"got": "^14.4.2",
-		"vscode-languageclient": "^9.0.1"
-	},
-	"devDependencies": {
-		"@types/mocha": "^10.0.7",
-		"@types/node": "^20.x",
-		"@types/vscode": "^1.93.0",
-		"@typescript-eslint/eslint-plugin": "^8.3.0",
-		"@typescript-eslint/parser": "^8.3.0",
-		"eslint": "^9.9.1",
-		"typescript": "^5.5.4",
-		"@vscode/vsce": "^3.1.0"
-	}
+  "name": "varnish-configuration-language",
+  "displayName": "Varnish VCL and Varnish VTC",
+  "description": "Varnish Config Language, Varnish Test Config",
+  "publisher": "audun-ytterdal",
+  "icon": "varnish-logo-png-transparent.png",
+  "repository": "https://github.com/auduny/vscode-vcl",
+  "version": "0.9.1",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "varnish",
+    "vcl",
+    "vcc",
+    "cache"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "vcl",
+        "aliases": [
+          "VCL",
+          "vcl"
+        ],
+        "extensions": [
+          ".vcl.erb",
+          ".vcl"
+        ],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "vtc",
+        "aliases": [
+          "Vtc",
+          "vtc"
+        ],
+        "extensions": [
+          ".vtc"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "vcl",
+        "scopeName": "source.vcl",
+        "path": "./syntaxes/vcl.tmLanguage.json"
+      },
+      {
+        "language": "vtc",
+        "scopeName": "source.vtc",
+        "path": "./syntaxes/vtc.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Varnish VCL",
+      "properties": {
+        "varnishls.path": {
+          "type": "string",
+          "description": "Path to varnishls"
+        }
+      }
+    }
+  },
+  "__metadata": {
+    "id": "dc902496-5dae-41a5-922f-1658496dfba6",
+    "publisherDisplayName": "Ytterdal Ventures",
+    "publisherId": "213ed9b9-2bdc-4374-9f73-43d95f05162e",
+    "isPreReleaseVersion": false
+  },
+  "main": "./out/extension",
+  "scripts": {
+    "vscode:prepublish": "tsc -b",
+    "build": "tsc -b",
+    "watch": "tsc -b -w",
+    "lint": "eslint --ext=ts ."
+  },
+  "dependencies": {
+    "got": "^11.8.0",
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.93.0",
+    "@typescript-eslint/eslint-plugin": "^8.3.0",
+    "@typescript-eslint/parser": "^8.3.0",
+    "eslint": "^9.9.1",
+    "typescript": "^5.5.4",
+    "@vscode/vsce": "^3.1.0"
+  }
 }
