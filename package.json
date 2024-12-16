@@ -63,7 +63,12 @@
         "varnishls.path": {
           "type": "string",
           "description": "Path to varnishls"
+        },
+        "varnishls.debugPath": {
+          "type": "string",
+          "description": "Path to varnishls in debugmode"
         }
+
       }
     }
   },
