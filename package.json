@@ -41,7 +41,11 @@
         "extensions": [
           ".vtc"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/varnish-logo-png-transparent-100x100.png",
+          "dark": "./icons/varnish-logo-png-transparent-100x100.png"
+        }
       }
     ],
     "grammars": [
@@ -68,7 +72,6 @@
           "type": "string",
           "description": "Path to varnishls in debugmode"
         }
-
       }
     }
   },
