@@ -5,7 +5,7 @@ import { getServerOrDownload } from './download';
 import { log } from './util';
 // import { getServerOrDownload } from './download';
 
-const LSPTAG = 'v0.0.14';
+const LSPTAG = 'v0.0.15';
 
 let client: lsp.LanguageClient;
 

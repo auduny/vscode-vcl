@@ -5,13 +5,19 @@ This is a plugin for VCL configuraion for varnish. It provides syntax highlighti
 ## Features
 
 * Syntax for VCL (Varnish Configuration Language) and VTC (Varnish Test Configuration)
-* LSP-server support from https://github.com/m4r7inp/varnish-lsp (bundled)
+* LSP-server support from https://github.com/m4r7inp/varnish-lsp (will be downloaded by extention)
 * Goto definition
 * Error checking
 * Linting
 * Completion based on either VMODs or VCC config files
 
 ## Requirements
+Create a enviroment VARIABLE like this (.zshrc, .profile .bashrc)
+`export VARNISHLS_VCC_PATHS="vcc:/opt/homebrew/opt/varnish/share/varnish/vcc:$HOME/.vcc-files/varnish-cache:$HOME/.vcc-files/enterprise:$HOME/.vcc-files/custom"`
+
+And dump your vcc files in one of these places (for homebrew it's allready)
+
+## Overides
 Create a `.varnishls.toml` file in your workspace directory
 
 ```toml
