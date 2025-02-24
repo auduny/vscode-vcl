@@ -4,6 +4,11 @@ All notable changes to the "vcl" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.10.0]
+- Upgrading to varnishls 0.0.15
+- Configurable VCC-paths
+- More Doc
+
 ## [0.9.1]
 - Adding setting for custom varnishls path
 

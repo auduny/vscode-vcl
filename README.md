@@ -9,16 +9,22 @@ This is a plugin for VCL configuraion for varnish. It provides syntax highlighti
 * Goto definition
 * Error checking
 * Linting
-* Completion based on either VMODs or VCC config files
+* Completion and linted based on either VMODs or VCC config files
 
-## Requirements
-Create a enviroment VARIABLE like this (.zshrc, .profile .bashrc)
+## Configuration
+The plugin will look for VCC files in the following places by default
+* `./lib`
+* `/vcc`
+* `/usr/share/varnish/vcc` -- Default location for packages and docker images
+* `/opt/homebrew/opt/varnish/share/varnish/vcc -- OSX brew install location
+* `$HOME/.varnishls/vcc/` -- Your own VCC files or download a bundle from the github page on https://github.com/auduny/vscode-vcl
+
+This can be changed by either changing configuration or setting the `VARNISHLS_VCC_PATH` enviroment variable in .profile, .zshrc or .bashrc
+
 `export VARNISHLS_VCC_PATHS="vcc:/opt/homebrew/opt/varnish/share/varnish/vcc:$HOME/.vcc-files/varnish-cache:$HOME/.vcc-files/enterprise:$HOME/.vcc-files/custom"`
 
-And dump your vcc files in one of these places (for homebrew it's allready)
-
 ## Overides
-Create a `.varnishls.toml` file in your workspace directory
+You can create a `.varnishls.toml` file in your workspace directory to override and finetune your setup, all values are optional
 
 ```toml
 # .varnishls.toml in your workspace dir
@@ -31,13 +37,6 @@ prefer_else_if = "hint"
 prefer_lowercase_headers = "hint"
 prefer_custom_headers_without_prefix = false
 ```
-
-VCC are varnish-spesific "header"-files that contains syntax and docs for vmods.
-Create a directory where you dump all the VCC files that match the vmods you are using and point the vcc_paths there.
-
-Example here: https://github.com/varnish/varnish-modules/blob/master/src/vmod_header.vcc
-
-
 ## Extension Settings
 
 None

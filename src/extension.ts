@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import * as lsp from 'vscode-languageclient/node';
 import { getServerOrDownload } from './download';
 import { log } from './util';
+import { execFile } from 'child_process';
 // import { getServerOrDownload } from './download';
 
 const LSPTAG = 'v0.0.15';
@@ -13,16 +14,27 @@ export async function activate(context: vscode.ExtensionContext) {
   const config = vscode.workspace.getConfiguration('varnishls');
   let serverPath = "";
   let serverDebugPath = "";
+  const homeDir = process.env.HOME || process.env.USERPROFILE; // Fallback for Windows
+  if (process.env.VARNISHLS_VCC_PATHS) {
+    log.info("Using VCC paths from $VARNISHLS_VCC_PATHS env ");
+  } else {
+    log.info("Using VCC-paths from Config")
+  }
+  const env = Object.assign({}, process.env, {
+    VARNISHLS_VCC_PATHS: process.env.VARNISHLS_VCC_PATHS || config.get('vccPaths')
+  });
+  log.info("VARNISHLS_VCC_PATHS: " + env.VARNISHLS_VCC_PATHS);
+  
+
   if (config.get('path')) {
     serverPath = config.get('path')
     log.warn("Custom varnishls set to: " + serverPath);
-
     
   } else {
-    log.info("Using bundled varnishls: " + serverPath)
     serverPath = /*context.extensionMode === vscode.ExtensionMode.Production*/ true
     ? await getServerOrDownload(context, LSPTAG)
     : path.resolve(__dirname, '../../target/release/varnishls');
+    log.info("Using bundled varnishls: " + serverPath)
   }
 
   if (config.get('debugPath')) {
@@ -32,11 +44,19 @@ export async function activate(context: vscode.ExtensionContext) {
     serverDebugPath = serverPath;
   }
 
-  const homeDir = process.env.HOME || process.env.USERPROFILE; // Fallback for Windows
-  const env = Object.assign({}, process.env, {
-    VARNISHLS_VCC_PATHS: path.join(homeDir,'.vcc-files')
-  });
+    // Run varnishls -V to get the version
+    execFile(serverPath, ['-V'], (error, stdout, stderr) => {
+      if (error) {
+        log.error(`Error running varnishls -V: ${error.message}`);
+        return;
+      }
+      if (stderr) {
+        log.error(`stderr from varnishls -V: ${stderr}`);
+        return;
+      }
+      log.info(`varnishls version: ${stdout}`);
 
+    });
 
   const serverExecutable: lsp.Executable = {
 //    command: '/Users/ay/src/private/vscode/varnishls/target/debug/varnishls',

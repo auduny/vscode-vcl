@@ -5,7 +5,7 @@
   "publisher": "audun-ytterdal",
   "icon": "varnish-logo-png-transparent.png",
   "repository": "https://github.com/auduny/vscode-vcl",
-  "version": "0.9.2",
+  "version": "0.10.0",
   "engines": {
     "vscode": "^1.93.0"
   },
@@ -66,11 +66,16 @@
       "properties": {
         "varnishls.path": {
           "type": "string",
-          "description": "Path to varnishls"
+          "description": "Path to varnishls, will use bundled if unset"
         },
         "varnishls.debugPath": {
           "type": "string",
           "description": "Path to varnishls in debugmode"
+        },
+        "varnishls.vccPaths": {
+          "type": "string",
+          "description": "Paths to vccfiles, seperated by colon, will be used if VARNISHLS_VCC_PATHS env is not set",
+          "default": "./lib:./vcc:/usr/share/varnish/vcc:/opt/homebrew/opt/varnish/share/varnish/vcc:$HOME/.varnishls/vcc/"
         }
       }
     }
