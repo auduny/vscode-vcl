@@ -6,7 +6,7 @@ import { log } from './util';
 import { execFile } from 'child_process';
 // import { getServerOrDownload } from './download';
 
-const LSPTAG = 'v0.0.15';
+const LSPTAG = 'v1.0.0';
 
 let client: lsp.LanguageClient;
 
