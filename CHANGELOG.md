@@ -6,6 +6,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [0.11.0]
 - Upgrading to varnishls 1.0.0
+- It now does formating!
 
 ## [0.10.0]
 - Upgrading to varnishls 0.0.15
