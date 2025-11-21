@@ -6,7 +6,7 @@ import { log } from './util';
 import { execFile } from 'child_process';
 // import { getServerOrDownload } from './download';
 
-const LSPTAG = 'v1.0.0';
+const LSPTAG = 'v1.0.1';
 
 let client: lsp.LanguageClient;
 
@@ -20,10 +20,18 @@ export async function activate(context: vscode.ExtensionContext) {
   } else {
     log.info("Using VCC-paths from Config")
   }
-  const env = Object.assign({}, process.env, {
-    VARNISHLS_VCC_PATHS: process.env.VARNISHLS_VCC_PATHS || config.get('vccPaths')
-  });
-  log.info("VARNISHLS_VCC_PATHS: " + env.VARNISHLS_VCC_PATHS);
+  // Resolve raw VCC paths from env override or configuration, then expand $HOME variants.
+  const rawVccPaths: string = (process.env.VARNISHLS_VCC_PATHS && process.env.VARNISHLS_VCC_PATHS.length > 0)
+    ? process.env.VARNISHLS_VCC_PATHS
+    : (config.get<string>('vccPaths') || '');
+
+  const expandedVccPaths = rawVccPaths.replace(/\$HOME|\${HOME}|\${env:HOME}/g, homeDir || '');
+
+  const env = {
+    ...process.env,
+    VARNISHLS_VCC_PATHS: expandedVccPaths
+  };
+  log.info("Expanded VARNISHLS_VCC_PATHS: " + env.VARNISHLS_VCC_PATHS);
   
 
   if (config.get('path')) {

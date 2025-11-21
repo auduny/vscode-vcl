@@ -5,7 +5,7 @@
   "publisher": "audun-ytterdal",
   "icon": "varnish-logo-png-transparent.png",
   "repository": "https://github.com/auduny/vscode-vcl",
-  "version": "0.10.0",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.93.0"
   },
