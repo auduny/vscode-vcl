@@ -15,6 +15,7 @@ export async function activate(context: vscode.ExtensionContext) {
   let serverPath = "";
   let serverDebugPath = "";
   const homeDir = process.env.HOME || process.env.USERPROFILE; // Fallback for Windows
+  let reportErrors: boolean = config.get<boolean>('reportErrors', true);
   if (process.env.VARNISHLS_VCC_PATHS) {
     log.info("Using VCC paths from $VARNISHLS_VCC_PATHS env ");
   } else {
@@ -91,6 +92,20 @@ export async function activate(context: vscode.ExtensionContext) {
 
   const clientOptions: lsp.LanguageClientOptions = {
     documentSelector: [{ scheme: 'file', language: 'vcl' }, { scheme: 'file', language: 'vtc' } ],
+    middleware: {
+      handleDiagnostics: (uri, diagnostics, next) => {
+        try {
+          if (!reportErrors) {
+            const filtered = diagnostics.filter(d => d.severity !== vscode.DiagnosticSeverity.Error);
+            return next(uri, filtered);
+          }
+        } catch (e) {
+          // In case of unexpected shaping issues, fall back to original diagnostics
+          log.warn('Diagnostics filtering failed, forwarding unfiltered.', e);
+        }
+        return next(uri, diagnostics);
+      }
+    }
   };
 
   client = new lsp.LanguageClient(
@@ -100,6 +115,17 @@ export async function activate(context: vscode.ExtensionContext) {
     clientOptions
   );
   client.start();
+
+  // Respond to configuration changes for diagnostics filtering
+  context.subscriptions.push(
+    vscode.workspace.onDidChangeConfiguration(e => {
+      if (e.affectsConfiguration('varnishls.reportErrors')) {
+        const cfg = vscode.workspace.getConfiguration('varnishls');
+        reportErrors = cfg.get<boolean>('reportErrors', true);
+        log.info('varnishls.reportErrors set to: ' + reportErrors);
+      }
+    })
+  );
 }
 
 export async function deactivate(): Promise<void> {
